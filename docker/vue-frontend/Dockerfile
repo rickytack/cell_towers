@@ -3,7 +3,7 @@ FROM node:lts as builder
 
 WORKDIR /app
 
-# Copy package files from the vue-frontend directory
+
 COPY vue-frontend/package*.json ./
 RUN npm install
 
@@ -11,7 +11,6 @@ RUN npm install
 COPY vue-frontend/ .
 RUN npm run build
 
-# Serve with NGINX
 FROM nginx:alpine
 
 COPY --from=builder /app/dist /usr/share/nginx/html

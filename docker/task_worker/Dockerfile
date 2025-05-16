@@ -1,7 +1,6 @@
-# Dockerfile for C++ task worker built with CMake (Ubuntu 22.04 LTS)
 FROM ubuntu:22.04 AS builder
 
-# Install build dependencies with pinned versions
+# Install build dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     build-essential \
@@ -17,16 +16,16 @@ RUN apt-get update && \
 WORKDIR /app
 COPY . .
 
-# Verify the CMakeLists.txt location (debug)
+# Verify the CMakeLists.txt location
 RUN ls -la /app/backend/task_worker/
 
-# Build with correct paths
+# Build
 RUN mkdir -p /app/build && \
     cd /app/build && \
     cmake ../backend/task_worker -DCMAKE_BUILD_TYPE=Release && \
     cmake --build . -- -j$(nproc)
 
-# Minimal runtime image
+
 FROM ubuntu:22.04
 
 # Runtime dependencies
@@ -36,7 +35,6 @@ RUN apt-get update && \
     libgrpc++1 \
     libcgal-dev
 
-# Copy the binary
 COPY --from=builder /app/build/task_worker /usr/local/bin/
 
 

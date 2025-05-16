@@ -1,5 +1,5 @@
 version: '3.8'
-
+# TODO: designated .yml for dev and prod required
 services:
   postgres:
     build:

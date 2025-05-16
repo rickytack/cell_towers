@@ -5,10 +5,8 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends libpq-dev gcc python3-dev && \
     rm -rf /var/lib/apt/lists/*
 
-# Set working directory to /app
 WORKDIR /app
 
-# Copy ONLY the backend directory (which contains its own pyproject.toml)
 COPY backend/ .
 
 ENV PYTHONPATH="/app" \
@@ -20,5 +18,3 @@ RUN pip install --no-cache-dir poetry && \
     poetry install --no-interaction --no-ansi --only main
 
 RUN chmod +x /app/scripts/*
-
-
