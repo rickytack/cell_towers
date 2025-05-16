@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  postgres:
+    build:
+      context: ..
+      dockerfile: docker/postgres/Dockerfile
+    container_name: postgres_plain
+    env_file: .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres-init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    healthcheck:
+      test: >
+        bash -c 
+        "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  web_app:
+    build:
+      context: ..
+      dockerfile: docker/web_app/Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - ../backend/.env
+    volumes:
+      - ../backend/:/app  # Mount the source code directory  ONLY FOR DEV.  OVERRIDES COPY backend/ . in dockerfile
+    command: bash /app/scripts/web_app_entrypoint.sh
+    depends_on:
+      postgres:
+        condition: service_healthy
+  task_worker:
+    build:
+      context: ..
+      dockerfile: docker/task_worker/Dockerfile
+    env_file:
+      - ../backend/.env
+  frontend:
+    build:
+      context: ..
+      dockerfile: docker/vue-frontend/Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - web_app
+    environment:
+      - NODE_ENV=production
+
+volumes:
+  postgres_data:
+
+
+
+
+

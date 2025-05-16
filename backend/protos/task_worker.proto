@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package task_worker;
+
+enum TaskType {
+  TRIANGULATION = 0;
+}
+
+service TaskWorker {
+  rpc Process (TaskRequest) returns (TaskResponse);
+}
+
+message GeoPoint {
+  float lat = 1;
+  float lng = 2;
+  optional float value = 3;
+}
+
+message TaskRequest {
+  repeated GeoPoint points = 1;
+  TaskType task_type = 2;
+}
+
+// Represents a single polygon
+message Polygon {
+  repeated GeoPoint vertices = 1;
+  float area = 2;
+}
+
+// Contains multiple polygons
+message PolygonResult {
+  repeated Polygon polygons = 1;
+}
+
+message TaskResponse {
+  oneof result {
+    PolygonResult polygons = 1;  // TODO: rename to polygons_res
+  }
+}

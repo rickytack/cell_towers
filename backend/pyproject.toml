@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cell-tower"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115,<0.116",  # Pinned to avoid breaking changes
+    "uvicorn>=0.34,<0.35",     # Same for uvicorn
+    "alembic (>=1.15.2,<2.0.0)",
+    "sqlalchemy (>=2.0.40,<3.0.0)",
+    "asyncpg (>=0.30.0,<0.31.0)",
+    "psycopg2 (>=2.9.10,<3.0.0)",
+    "pydantic-settings (>=2.9.1,<3.0.0)",
+    "grpcio (>=1.71.0,<2.0.0)",
+    "grpcio-tools>=1.71.0",
+    "protobuf>=5.29.4"
+]
+
+[tool.poetry]
+package-mode = false
+
+[tool.autopep8]
+list-fixes = true
+max-line-length = 120
