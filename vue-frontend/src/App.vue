@@ -7,7 +7,7 @@ import OsmMap from './components/OsmMap.vue'
   <div class="app">
     <h1>Cell towers</h1>
     <div class="map-container">
-      <OsmMap apiUrl="http://localhost:8000/api/v1"/>
+      <OsmMap apiUrl="/api/v1"/>
     </div>
   </div>
 </template>
