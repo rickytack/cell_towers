@@ -9,8 +9,6 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./postgres-init.sql:/docker-entrypoint-initdb.d/init.sql
-    ports:
-      - "5432:5432"
     restart: unless-stopped
     healthcheck:
       test: >
@@ -23,8 +21,6 @@ services:
     build:
       context: ..
       dockerfile: docker/web_app/Dockerfile
-    ports:
-      - "8000:8000"
     env_file:
       - ../backend/.env
     command: bash /app/scripts/web_app_entrypoint.sh
