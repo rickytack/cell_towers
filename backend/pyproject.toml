@@ -6,9 +6,11 @@ build-backend = "setuptools.build_meta"
 name = "cell-tower"
 version = "0.1.0"
 requires-python = ">=3.11"
+#TODO: split do dev, test, prod deps
 dependencies = [
-    "fastapi>=0.115,<0.116",  # Pinned to avoid breaking changes
-    "uvicorn>=0.34,<0.35",     # Same for uvicorn
+    "fastapi>=0.115,<0.116",
+    "uvicorn>=0.34,<0.35",
+    "gunicorn>=24.0,<25.0",
     "alembic (>=1.15.2,<2.0.0)",
     "sqlalchemy (>=2.0.40,<3.0.0)",
     "asyncpg (>=0.30.0,<0.31.0)",
