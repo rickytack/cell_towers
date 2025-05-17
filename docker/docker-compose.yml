@@ -1,5 +1,4 @@
 version: '3.8'
-# TODO: designated .yml for dev and prod required
 services:
   postgres:
     build:
@@ -28,8 +27,6 @@ services:
       - "8000:8000"
     env_file:
       - ../backend/.env
-    volumes:
-      - ../backend/:/app  # Mount the source code directory  ONLY FOR DEV.  OVERRIDES COPY backend/ . in dockerfile
     command: bash /app/scripts/web_app_entrypoint.sh
     depends_on:
       postgres:
@@ -53,8 +50,3 @@ services:
 
 volumes:
   postgres_data:
-
-
-
-
-

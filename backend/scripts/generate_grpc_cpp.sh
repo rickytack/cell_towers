@@ -1,13 +1,13 @@
 #!/bin/bash
 set -euo pipefail
 
-# Directory setup
-PROTO_DIR="/home/solomin/PET/Cells/cell-tower/backend/protos/"
-OUT_DIR="/home/solomin/PET/Cells/cell-tower/backend/task_worker/generated/"
+PROTO_DIR="/app/backend/protos/"
+OUT_DIR="/app/backend/task_worker/generated/"
 mkdir -p "$OUT_DIR"
 
-# Generate protobuf and gRPC code
+# Generate
 protoc \
+  --experimental_allow_proto3_optional \
   -I="$PROTO_DIR" \
   --cpp_out="$OUT_DIR" \
   --grpc_out="$OUT_DIR" \

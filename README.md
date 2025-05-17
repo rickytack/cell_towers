@@ -1,6 +1,9 @@
 # Cell Tower Visualization Service
 
-![Heatmap Visualization](screenshots/heatmap-visualization.png "Example of heatmap visualization")
+<div style="display: flex; justify-content: space-between;">
+  <img src="screenshots/heatmap-visualization.png" alt="Heatmap" style="width: 48%;"/>
+  <img src="screenshots/triangulation.png" alt="Triangulation" style="width: 48%;"/>
+</div>
 
 A  visualization service for cell tower data with heatmap and triangulation capabilities.
 
@@ -21,3 +24,9 @@ A  visualization service for cell tower data with heatmap and triangulation capa
 - C++/CGAL (Heavy computations)
 - PostgreSQL
 - gRPC
+
+## Deploy 
+```
+cd docker
+docker-compose up
+```

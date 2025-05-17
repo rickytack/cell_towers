@@ -1,7 +1,6 @@
 #!/bin/bash
 OUT_DIR="/app/web_app/grpc_client/generated"
 
-# Standard generation
 python -m grpc_tools.protoc \
   -I/app/protos \
   --python_out="$OUT_DIR" \
